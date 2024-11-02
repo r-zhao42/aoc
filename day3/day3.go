@@ -22,8 +22,11 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 	row := 0
+
 	symbolLocations := []Coordinate{}
 	digitLocations := make(map[Coordinate]int)
+
+	// NOTE: for part 2
 	gearLocations := []Coordinate{}
 	for scanner.Scan() {
 		line := scanner.Bytes()
@@ -31,6 +34,8 @@ func main() {
 		symbolCols := notDigitOrPeriod.FindAllIndex(line, -1)
 		for _, location := range symbolCols {
 			symbolLocations = append(symbolLocations, Coordinate{row, location[0]})
+
+			// NOTE: for part 2
 			if string(line[location[0]]) == "*" {
 				gearLocations = append(gearLocations, Coordinate{row, location[0]})
 			}
@@ -88,6 +93,8 @@ func getPartNumber(loc Coordinate, digitLocs map[Coordinate]int) int {
 	}
 	return res
 }
+
+// NOTE: for part 2
 func getGearRatio(loc Coordinate, digitLocs map[Coordinate]int) int {
 	// NOTE: Solution only works if adjacent part numbers are unique
 	res := 1
